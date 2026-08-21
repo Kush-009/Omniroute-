@@ -14,7 +14,7 @@ echo "Attempting to restore SQLite database from Litestream replica..."
 litestream restore -config /etc/litestream.yml -if-replica-exists /app/data/storage.sqlite
 
 # 4. Start Litestream replication in the background, and wrap the OmniRoute node process.
-# Litestream acts as the parent process. It runs "npm start" (which starts OmniRoute),
+# Litestream acts as the parent process. It runs the production OmniRoute CLI,
 # and continuously streams the Write-Ahead Log (WAL) to your bucket.
 echo "Starting Litestream replication and OmniRoute application..."
-exec litestream replicate -config /etc/litestream.yml -exec "npm start"
+exec litestream replicate -config /etc/litestream.yml -exec "node bin/omniroute.mjs"
