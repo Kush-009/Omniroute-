@@ -1,0 +1,12 @@
+# litestream.yml
+dbs:
+  - path: /app/data/storage.sqlite
+    replicas:
+      - type: s3
+        # These variables will be injected from the Render environment dashboard
+        bucket: ${LITESTREAM_BUCKET}
+        endpoint: ${LITESTREAM_ENDPOINT}
+        path: storage.sqlite
+        # Region is required by Litestream even if using a region-less provider like Cloudflare R2
+        region: us-east-1
+
