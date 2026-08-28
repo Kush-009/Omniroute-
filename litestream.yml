@@ -9,3 +9,6 @@ dbs:
         path: storage.sqlite
         # Region is required by Litestream even if using a region-less provider
         region: us-east-1
+        # PERFORMANCE FIX: Tell Litestream to sync every 10 seconds instead of 1 second.
+        # This massively drops the CPU usage, letting the web dashboard load much faster.
+        sync-interval: 10s
