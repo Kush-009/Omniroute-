@@ -15,6 +15,6 @@ echo "Attempting to restore SQLite database from Litestream replica..."
 litestream restore -config /etc/litestream.yml -if-replica-exists /app/data/storage.sqlite
 
 # 4. Start Litestream replication in the background, and wrap the OmniRoute node process.
-# We are executing the production CLI directly since update-notifier is now installed.
+# We are now executing the standalone Next.js server directly, bypassing the CLI tool entirely.
 echo "Starting Litestream replication and OmniRoute application..."
-exec litestream replicate -config /etc/litestream.yml -exec "node bin/omniroute.mjs"
+exec litestream replicate -config /etc/litestream.yml -exec "node server.js"
