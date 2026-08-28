@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Force production mode so Next.js does not try to use Webpack for live compilation
+# Force production mode so the server behaves correctly
 export NODE_ENV=production
 
 # 1. Ensure the data directory exists
@@ -15,7 +15,6 @@ echo "Attempting to restore SQLite database from Litestream replica..."
 litestream restore -config /etc/litestream.yml -if-replica-exists /app/data/storage.sqlite
 
 # 4. Start Litestream replication in the background, and wrap the OmniRoute node process.
-# We are reverting to npm start because it runs the required bootstrap script for secrets,
-# and NODE_ENV=production will stop the Webpack missing module crash.
+# We are executing the production CLI directly since update-notifier is now installed.
 echo "Starting Litestream replication and OmniRoute application..."
-exec litestream replicate -config /etc/litestream.yml -exec "npm start"
+exec litestream replicate -config /etc/litestream.yml -exec "node bin/omniroute.mjs"
