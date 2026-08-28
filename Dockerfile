@@ -7,8 +7,8 @@ USER root
 # Install curl, tar, and CA certificates
 RUN apt-get update && apt-get install -y curl tar ca-certificates && rm -rf /var/lib/apt/lists/*
 
-# Install update-notifier directly to resolve any missing package errors
-RUN npm install update-notifier
+# Install update-notifier safely without triggering peer dependency blocks
+RUN npm install update-notifier --legacy-peer-deps
 
 # Download and install Litestream v0.3.13 for Linux AMD64
 RUN curl -L "https://github.com/benbjohnson/litestream/releases/download/v0.3.13/litestream-v0.3.13-linux-amd64.tar.gz" -o litestream.tar.gz \
