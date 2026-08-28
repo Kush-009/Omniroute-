@@ -7,6 +7,5 @@ dbs:
         bucket: ${LITESTREAM_BUCKET}
         endpoint: ${LITESTREAM_ENDPOINT}
         path: storage.sqlite
-        # Region is required by Litestream even if using a region-less provider like Cloudflare R2
+        # Region is required by Litestream even if using a region-less provider
         region: us-east-1
-
